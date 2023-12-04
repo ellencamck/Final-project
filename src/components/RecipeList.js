@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import RecipeCard from './RecipeCard';
-import RecipeForm from './RecipeForm';
 
 export default function RecipeList() {
     const [apiRecipes, setApiRecipes] = useState([]);
@@ -52,7 +51,6 @@ export default function RecipeList() {
                     thumbnail={recipe.thumbnail}
                 />
             ))}
-            <RecipeForm addRecipeToList={addRecipeToList} />
         </div>
     );
 };
