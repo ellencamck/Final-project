@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import axios from 'axios';
 import RecipeCard from './RecipeCard';
 
@@ -9,7 +9,8 @@ export default function RecipeList() {
     useEffect(() => {
         const fetchApiRecipes = async () => {
             try {
-                const response = await axios.get('https://www.themealdb.com/api/json/v1/1/random.php');
+                const response = await axios.get('https://www.themealdb.com/api/json/v1/1/random.php/recipes');
+                console.log("fetch api recipes response, " , response.data)
                 setApiRecipes(response.data.meals);
             } catch (error) {
                 console.error('Error fetching API data:', error);

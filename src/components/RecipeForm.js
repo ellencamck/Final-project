@@ -32,7 +32,7 @@ export default function RecipeForm({ addRecipeToList }) {
 
     try {
       // Simulate sending form data to a server (replace with actual API call)
-      const response = await fetch('https://your-api-endpoint.com/recipes', {
+      const response = await fetch('https://65307f8a6c756603295eb0f7.mockapi.io/api/week14/recipes', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
