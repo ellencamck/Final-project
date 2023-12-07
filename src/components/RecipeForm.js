@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import React, { useState, useContext } from "react";
+import { Form, Button } from "react-bootstrap";
+import { RecipeContext } from "./RecipeContext"; //Import the context component to allow access to the function addRecipeToList
 
-export default function RecipeForm({ addRecipeToList }) {
+export default function RecipeForm() {
+  //if you then need to reference multiple values from the context component, you can destructure them from the context component
+  //  const { isLoading, recipes, statusMessage, addRecipeToList } = useContext(RecipeContext);
+
+  //Only need to reference the function addRecipeToList from the context component in this case
+  const { addRecipeToList } = useContext(RecipeContext); //Add the context component to the function
   const [formData, setFormData] = useState({
-    title: '',
-    category: '',
-    area: '',
-    ingredients: '',
-    instructions: '',
+    title: "",
+    category: "",
+    area: "",
+    ingredients: "",
+    instructions: "",
     image: null, // Add a state for the image file
   });
 
@@ -32,16 +38,19 @@ export default function RecipeForm({ addRecipeToList }) {
 
     try {
       // Simulate sending form data to a server (replace with actual API call)
-      const response = await fetch('https://65307f8a6c756603295eb0f7.mockapi.io/api/week14/recipes', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://65307f8a6c756603295eb0f7.mockapi.io/api/week14/recipes",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (!response.ok) {
-        throw new Error('Failed to add recipe');
+        throw new Error("Failed to add recipe");
       }
 
       // Assuming the server returns the added recipe
@@ -52,18 +61,18 @@ export default function RecipeForm({ addRecipeToList }) {
 
       // After submitting the form, you can clear the form data or perform any other actions
       setFormData({
-        title: '',
-        category: '',
-        area: '',
-        ingredients: '',
-        instructions: '',
+        title: "",
+        category: "",
+        area: "",
+        ingredients: "",
+        instructions: "",
         image: null,
       });
 
       // For demonstration purposes, let's log the added recipe
-      console.log('Added Recipe:', addedRecipe);
+      console.log("Added Recipe:", addedRecipe);
     } catch (error) {
-      console.error('Error adding recipe:', error);
+      console.error("Error adding recipe:", error);
     }
   };
 
