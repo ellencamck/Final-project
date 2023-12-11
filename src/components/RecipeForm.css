@@ -1,0 +1,5 @@
+.gradient-background {
+    background: linear-gradient(to left, #44434388, #ddd);
+    padding: 20px; /* Add padding for better visibility */
+    border-radius: 10px; /* Optional: Add border-radius for rounded corners */
+}

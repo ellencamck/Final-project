@@ -7,8 +7,8 @@ export default function Home() {
         <div className="home-container">
             <div className="background-image"></div>
             <div className="home-content-container">
-                <h1>Recipe App</h1>
-                <p>Discover and explore delicious recipes!</p>
+                <h1>FlavorFellowship</h1>
+                <p>Discover and share delicious recipes!</p>
                 <Link to="/recipes">View Recipes</Link>
             </div>
         </div>

@@ -1,20 +1,15 @@
-import React, { useState, useContext } from "react";
-import { Form, Button } from "react-bootstrap";
-import { RecipeContext } from "./RecipeContext"; //Import the context component to allow access to the function addRecipeToList
+import React, { useState } from "react";
+import { Form, Button, Row, Col } from "react-bootstrap";
+import "./RecipeForm.css"; 
 
 export default function RecipeForm() {
-  //if you then need to reference multiple values from the context component, you can destructure them from the context component
-  //  const { isLoading, recipes, statusMessage, addRecipeToList } = useContext(RecipeContext);
-
-  //Only need to reference the function addRecipeToList from the context component in this case
-  const { addRecipeToList } = useContext(RecipeContext); //Add the context component to the function
   const [formData, setFormData] = useState({
     title: "",
     category: "",
-    area: "",
+    servings: "",
     ingredients: "",
     instructions: "",
-    image: null, // Add a state for the image file
+    thumbnail: null,
   });
 
   const handleChange = (e) => {
@@ -29,7 +24,7 @@ export default function RecipeForm() {
     const file = e.target.files[0];
     setFormData((prevData) => ({
       ...prevData,
-      image: file,
+      thumbnail: file,
     }));
   };
 
@@ -37,110 +32,118 @@ export default function RecipeForm() {
     e.preventDefault();
 
     try {
-      // Simulate sending form data to a server (replace with actual API call)
-      const response = await fetch(
-        "https://65307f8a6c756603295eb0f7.mockapi.io/api/week14/recipes",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      // Send form data to your email (replace with your email sending logic)
+      console.log("Form data:", formData);
 
-      if (!response.ok) {
-        throw new Error("Failed to add recipe");
-      }
-
-      // Assuming the server returns the added recipe
-      const addedRecipe = await response.json();
-
-      // Add the recipe to the list
-      addRecipeToList(addedRecipe);
-
-      // After submitting the form, you can clear the form data or perform any other actions
+      // Clear the form data after submission
       setFormData({
         title: "",
         category: "",
-        area: "",
+        servings: "",
         ingredients: "",
         instructions: "",
-        image: null,
+        thumbnail: null,
       });
 
-      // For demonstration purposes, let's log the added recipe
-      console.log("Added Recipe:", addedRecipe);
+      // For demonstration purposes, you can add additional logic here
     } catch (error) {
-      console.error("Error adding recipe:", error);
+      console.error("Error submitting form:", error);
     }
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="title">
-        <Form.Label>Title</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Enter title"
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
-        />
-      </Form.Group>
+    <div style={{ backgroundColor: '#f0f0f039' }} className="vh-100 d-flex align-items-center justify-content-center gradient-background">
+    <div>
+      <h2 className="mb-4">Do you have a recipe that is so good it should not be kept a secret? Send it to us!</h2>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group as={Row} className="mb-3">
+          <Form.Label column sm="2">
+            Title
+          </Form.Label>
+          <Col sm="10">
+            <Form.Control
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              placeholder="Enter recipe's name..."
+            />
+          </Col>
+        </Form.Group>
 
-      <Form.Group controlId="category">
-        <Form.Label>Category</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Enter category"
-          name="category"
-          value={formData.category}
-          onChange={handleChange}
-        />
-      </Form.Group>
+        <Form.Group as={Row} className="mb-3">
+          <Form.Label column sm="2">
+            Category
+          </Form.Label>
+          <Col sm="10">
+            <Form.Control
+              type="text"
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              placeholder="Appetizer, Dessert..."
+            />
+          </Col>
+        </Form.Group>
 
-      <Form.Group controlId="area">
-        <Form.Label>Area</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Enter area"
-          name="area"
-          value={formData.area}
-          onChange={handleChange}
-        />
-      </Form.Group>
+        <Form.Group as={Row} className="mb-3">
+          <Form.Label column sm="2">
+            Servings
+          </Form.Label>
+          <Col sm="10">
+            <Form.Control
+              type="text"
+              name="servings"
+              value={formData.servings}
+              onChange={handleChange}
+              placeholder="How many servings..."
+            />
+          </Col>
+        </Form.Group>
 
-      <Form.Group controlId="ingredients">
-        <Form.Label>Ingredients</Form.Label>
-        <Form.Control
-          as="textarea"
-          placeholder="Enter ingredients"
-          name="ingredients"
-          value={formData.ingredients}
-          onChange={handleChange}
-        />
-      </Form.Group>
+        <Form.Group controlId="ingredients">
+          <Form.Label>Ingredients</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={3}  // Adjust the number of rows as needed
+            name="ingredients"
+            value={formData.ingredients}
+            onChange={handleChange}
+            placeholder="Enter ingredients..."
+          />
+        </Form.Group>
 
-      <Form.Group controlId="instructions">
-        <Form.Label>Instructions</Form.Label>
-        <Form.Control
-          as="textarea"
-          placeholder="Enter instructions"
-          name="instructions"
-          value={formData.instructions}
-          onChange={handleChange}
-        />
-      </Form.Group>
+        <Form.Group controlId="instructions">
+          <Form.Label>Instructions</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={3}  // Adjust the number of rows as needed
+            name="instructions"
+            value={formData.instructions}
+            onChange={handleChange}
+            placeholder="Enter instructions..."
+          />
+        </Form.Group>
 
-      <Form.Group controlId="image">
-        <Form.Label>Image</Form.Label>
-        <Form.Control type="file" name="image" onChange={handleImageChange} />
-      </Form.Group>
+        <Form.Group as={Row} className="mt-3">
+          <Form.Label column sm="2">
+            Image
+          </Form.Label>
+          <Col sm="10">
+            <Form.Control
+              type="file"
+              accept="image/*"
+              name="image"
+              onChange={handleImageChange}
+            />
+          </Col>
+        </Form.Group>
 
-      <Button variant="primary" type="submit">
-        Add Recipe
-      </Button>
-    </Form>
+        <Button variant="dark" type="submit" className="mt-3">
+          Send Recipe
+        </Button>
+      </Form>
+      </div>
+    </div>
   );
 }

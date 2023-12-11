@@ -1,0 +1,69 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    },
+    {
+      "content": "so good",
+      "recipeId": "1",
+      "id": 2
+    },
+    {
+      "content": "muito bom",
+      "recipeId": "1",
+      "id": 3
+    },
+    {
+      "content": "so good!",
+      "recipeId": "1",
+      "id": 4
+    },
+    {
+      "content": "so good",
+      "recipeId": "1",
+      "id": 5
+    },
+    {
+      "content": "So good!",
+      "recipeId": "1",
+      "id": 6
+    },
+    {
+      "content": "So good!",
+      "recipeId": "1",
+      "id": 7
+    },
+    {
+      "content": "It was so quick to makee it!",
+      "recipeId": "1",
+      "id": 8
+    },
+    {
+      "content": "",
+      "recipeId": "1",
+      "id": 9
+    },
+    {
+      "content": "So good!",
+      "recipeId": "2",
+      "id": 10
+    },
+    {
+      "content": "quick and easy!",
+      "recipeId": "3",
+      "id": 11
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
